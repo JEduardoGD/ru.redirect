@@ -1,4 +1,4 @@
-package digital.serpiente.ru.redirector.entity;
+package digital.serpiente.ru.redirector.persistence.entity;
 
 import java.io.Serializable;
 import java.util.Date;

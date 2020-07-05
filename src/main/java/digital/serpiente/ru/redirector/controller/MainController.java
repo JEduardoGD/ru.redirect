@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import digital.serpiente.ru.redirector.dto.RequestDTO;
-import digital.serpiente.ru.redirector.entity.RequestLog;
+import digital.serpiente.ru.redirector.persistence.entity.RequestLog;
 import digital.serpiente.ru.redirector.persistence.repository.RequestRepository;
 import digital.serpiente.ru.redirector.util.ProcessRequestUtil;
 
