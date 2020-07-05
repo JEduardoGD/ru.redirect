@@ -11,11 +11,13 @@ public class RequestDTO implements Serializable {
 	private int id;
 	private String remoteAddress;
 	private String requestedUrl;
+	private String uri;
 	private Date date;
 
-	public RequestDTO(String remoteAddress, String requestedUrl, Date date) {
+	public RequestDTO(String remoteAddress, String requestedUrl, String uri, Date date) {
 		this.remoteAddress = remoteAddress;
 		this.requestedUrl = requestedUrl;
+		this.uri = uri;
 		this.date = date;
 	}
 
@@ -41,6 +43,14 @@ public class RequestDTO implements Serializable {
 
 	public void setRequestedUrl(String requestedUrl) {
 		this.requestedUrl = requestedUrl;
+	}
+
+	public String getUri() {
+		return uri;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
 	}
 
 	public Date getDate() {
