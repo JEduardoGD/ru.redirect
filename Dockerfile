@@ -3,7 +3,7 @@ LABEL maintainer="eduardo_gd@hotmail.com"
 VOLUME /tmp
 #EXPOSE 8080
 ARG JAR_FILE=target/redirector.jar
-ADD ${JAR_FILE} recibir.jar
+ADD ${JAR_FILE} redirector.jar
 
 CMD java -v
 ARG MYSQL_DB_URL=$MYSQL_DB_URL
