@@ -1,0 +1,43 @@
+version: '3.1'
+services:
+  mysql_docker:
+   image: mysql:5.7.28
+   environment:
+     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+   ports:
+     - 3306:3306
+   volumes:
+   - ./opt/mysql:/var/lib/mysql
+   - ./initdata/initdb.sql:/docker-entrypoint-initdb.d/init.sql
+   restart: unless-stopped
+   networks:
+      - asgard
+
+  phpmyadmin-docker:
+    depends_on:
+      - mysql_docker
+    image: phpmyadmin/phpmyadmin:edge
+    ports:
+      - '8088:80'
+    environment:
+      PMA_HOST: mysql_docker
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    restart: unless-stopped
+    networks:
+      - asgard
+
+  ru.redirect:
+    depends_on:
+      - mysql_docker
+    image: jeduardogd/ru.redirect:latest
+    ports:
+      - '8080:8080'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_CONN_STR: ${MYSQL_CONN_STR}
+    restart: unless-stopped
+    networks:
+      - asgard
+
+networks:
+  asgard:
