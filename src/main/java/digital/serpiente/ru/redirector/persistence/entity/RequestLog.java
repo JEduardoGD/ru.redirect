@@ -19,7 +19,7 @@ public class RequestLog implements Serializable {
 	private static final long serialVersionUID = -5076702474890551712L;
 	@Id()
 	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "remote_address")
