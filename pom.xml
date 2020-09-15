@@ -57,13 +57,11 @@
                 </exclusion>
 			</exclusions>
 		</dependency>
-	</dependencies>
 
         <!-- junit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -72,6 +70,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+	</dependencies>
 
 	<build>
 		<directory>${project.basedir}/target</directory>
