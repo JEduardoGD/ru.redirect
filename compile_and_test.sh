@@ -13,13 +13,4 @@ mvn -v
 
 mvn clean package -Dmaven.test.skip=true
 
-if [[ "$(docker images -q jeduardogd/ru.redirect 2> /dev/null)" == "" ]]; then
-	docker images -a | grep "jeduardogd/ru.redirect" | awk '{print $3}' | xargs docker rmi
-fi
-
-docker build -t jeduardogd/ru.redirect:latest .
-
-docker tag jeduardogd/ru.redirect:latest jeduardogd/ru.redirect:$VERSION
-
-docker push jeduardogd/ru.redirect:latest
-docker push jeduardogd/ru.redirect:$VERSION
+mvn sonar:sonar

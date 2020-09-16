@@ -31,4 +31,7 @@ build/
 .vscode/
 
 ### ADDED ###
+client/initdata/
 client/opt/
+docker/initdata/
+docker/opt/

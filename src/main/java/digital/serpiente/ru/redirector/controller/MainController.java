@@ -17,7 +17,7 @@ public class MainController {
 	private MainService mainService;
 
 	@GetMapping("/{callsign}")
-	void getRedirectForCallsign(@PathVariable String callsign, HttpServletRequest request, HttpServletResponse httpServletResponse) {
+	public void getRedirectForCallsign(@PathVariable String callsign, HttpServletRequest request, HttpServletResponse httpServletResponse) {
 		mainService.getRedirectForCallsign(callsign, request, httpServletResponse);
 	}
 }
