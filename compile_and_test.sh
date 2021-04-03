@@ -11,6 +11,6 @@ VERSION=`date +"%Y%m%d_%H%M"`
 
 mvn -v
 
-mvn clean package -Dmaven.test.skip=true
+mvn clean package
 
 mvn sonar:sonar

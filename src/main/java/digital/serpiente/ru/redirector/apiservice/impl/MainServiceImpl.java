@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import digital.serpiente.ru.redirector.apiservice.MainService;
@@ -18,14 +19,12 @@ import digital.serpiente.ru.redirector.util.ProcessRequestUtil;
 @Service
 public class MainServiceImpl implements MainService {
 
-	@Autowired
-	private ModelMapper modelMapper;
-
-	@Autowired
-	private RequestRepository requestRepository;
-
-	@Autowired
-	private RequestRedirectRepository requestRedirecttRepository;
+	@Autowired private ModelMapper modelMapper;
+	@Autowired private RequestRepository requestRepository;
+	@Autowired private RequestRedirectRepository requestRedirecttRepository;
+	
+	@Value("${default.redirect}")
+	private String defaultRedirect;
 
 	@Override
 	public void getRedirectForCallsign(String callsign, HttpServletRequest request,
@@ -38,7 +37,7 @@ public class MainServiceImpl implements MainService {
 		String redirect = requestRedirecttRepository.getActiveRedirectFor(callsignFromUri);
 
 		if (redirect == null) {
-			httpServletResponse.setStatus(404);
+		    redirect = defaultRedirect.replace("[callsign]", callsignFromUri);
 		}
 		httpServletResponse.setHeader("Location", redirect);
 		httpServletResponse.setStatus(302);

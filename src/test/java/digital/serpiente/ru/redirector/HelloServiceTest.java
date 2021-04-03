@@ -1,41 +1,53 @@
 package digital.serpiente.ru.redirector;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import digital.serpiente.ru.redirector.controller.MainController;
+import digital.serpiente.ru.redirector.persistence.entity.RequestLog;
+import digital.serpiente.ru.redirector.persistence.repository.RequestRepository;
 
 
-@AutoConfigureMockMvc
-@ContextConfiguration(classes = {MainController.class/*, BasicBirthdayService.class*/})
-@WebMvcTest
 @SpringBootTest
+@AutoConfigureMockMvc
 public class HelloServiceTest {
 	@Autowired
 	private MockMvc mockMvc;
+	
+	@Autowired
+	RequestRepository requestRepository;
 
 	@Test
-	 private void testStarSign(String birthday, String ss) throws Exception {
-	        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/somestring")).andReturn();
-	        		/*
-	                .with(user(TEST_USER_ID))
-	                .with(csrf())
-	                .content(birthday)
-	                .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
-	                .andExpect(status().isOk())
-	                .andReturn();*/
-	        String resultSS = result.getResponse().getContentAsString();
-	        assertNotNull(resultSS);
-	        assertEquals(ss, resultSS);
-	    }
+	public void shouldReciveRedirect() throws Exception {
+		RequestLog requestLog = new RequestLog();
+		requestLog.setDate(new Date());
+		requestLog.setRemoteAddress("https://www.att.com.mx/");
+		requestLog.setRequestedUrl("/xe1jeg");
+		requestRepository.save(requestLog);
+		
+		this
+		.mockMvc.perform(get("/xe1jeg"))
+		.andDo(print())
+		.andExpect(status().is3xxRedirection());
+	}
+	
+//	@LocalServerPort
+//	private int port;
+//
+//	@Autowired
+//	private TestRestTemplate restTemplate;
+//
+//	@Test
+//	public void greetingShouldReturnDefaultMessage() throws Exception {
+//		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
+//				String.class)).contains("Hello, World");
+//	}
 }
