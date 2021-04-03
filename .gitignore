@@ -35,3 +35,6 @@ client/initdata/
 client/opt/
 docker/initdata/
 docker/opt/
+
+#added
+.attach_pid*

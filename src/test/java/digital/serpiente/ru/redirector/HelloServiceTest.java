@@ -38,16 +38,4 @@ public class HelloServiceTest {
 		.andDo(print())
 		.andExpect(status().is3xxRedirection());
 	}
-	
-//	@LocalServerPort
-//	private int port;
-//
-//	@Autowired
-//	private TestRestTemplate restTemplate;
-//
-//	@Test
-//	public void greetingShouldReturnDefaultMessage() throws Exception {
-//		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
-//				String.class)).contains("Hello, World");
-//	}
 }
